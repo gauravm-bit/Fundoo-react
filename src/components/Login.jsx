@@ -53,9 +53,6 @@ class Login extends Component {
                 <h3>Not registered yet?</h3>
                 <a className='Link' href='/register'>Create Fundoo Account</a>
               </div>
-              
-            
-          
         </Card>
       </div>
     );

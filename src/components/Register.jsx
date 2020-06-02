@@ -21,6 +21,7 @@ class Register extends Component {
                                 <div className='first'>
                                     <TextField id='firstname'
                                         label='First Name'
+                                        autoComplete='off'
                                         name='first_name'
                                         margin='normal'
                                         variant='outlined'
@@ -30,6 +31,7 @@ class Register extends Component {
                                 <div className='last'>
                                     <TextField id='lastname'
                                         label='Last Name'
+                                        autoComplete='off'
                                         name='last_name'
                                         margin='normal'
                                         variant='outlined'
@@ -41,6 +43,7 @@ class Register extends Component {
                                 <TextField id='email'
                                     label='Email'
                                     name='email'
+                                    autoComplete='off'
                                     margin='normal'
                                     variant='outlined'
                                     >
