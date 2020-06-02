@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import './Login.css';
 
 
-class MyComponent extends Component {
+class Login extends Component {
   render() {
     return (
       <div>
@@ -14,6 +14,8 @@ class MyComponent extends Component {
             <h3 className="loginHead">Fundoo</h3>
             <div className='loginText'>
               <h3>Login into your Fundoo account</h3>
+              </div>
+              </div>
               <form>
                 <div>
                   <TextField className='loginTextField'
@@ -52,13 +54,13 @@ class MyComponent extends Component {
                 <a className='Link' href='/register'>Create Fundoo Account</a>
               </div>
               
-            </div>
-          </div>
+            
+          
         </Card>
       </div>
     );
   }
 }
 
-export default MyComponent;
+export default Login;
 

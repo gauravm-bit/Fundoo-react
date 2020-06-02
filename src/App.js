@@ -1,11 +1,11 @@
 import React from 'react';
-// import Register from './components/Register'
 import './App.css';
-import Login from './components/Login';
+// import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
   return (
-      <Login />     
+      <Register />     
   );
 }
 
