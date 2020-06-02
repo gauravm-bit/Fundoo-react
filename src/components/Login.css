@@ -1,0 +1,56 @@
+.loginCard{
+  width: 500px;
+  border: 1px solid lightgray;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative; top: 100px;
+  border-radius: 40px;
+  padding: 30px;
+}
+ 
+.loginTitle{
+  width: 100px;
+  height: 40px;
+  margin-left: 48px;
+}
+
+.loginHead{
+  font-display: inherit;
+  font-family: 'Segoe UI';
+  font-size: 25px;
+  color: #3f51b5;
+  padding: 0;
+  text-align: center;
+}
+
+.loginText{
+  text-align: center;
+  font-size: small;
+}
+
+.loginTextField{
+  width: 405px;
+  height: 50px;
+}
+
+.loginButton
+{
+    float: left;
+    margin-top: 1.5em;
+    margin-left: 13em;
+}
+
+.forgot{
+  float: left;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 5.5em;
+  margin-top: 2em;
+}
+
+.register{
+  float: left;
+  margin-left: 13em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 1em;
+}
