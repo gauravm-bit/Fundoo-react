@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { register } from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -14,7 +15,8 @@ class Register extends Component {
             last_name: '',
             email: '',
             password: '',
-            confirm_password: ''
+            confirm_password: '',
+            service: 'advanced'
         }
     }
 
@@ -34,15 +36,29 @@ class Register extends Component {
         }
         else {
 
-            let value =
+            var value =
             {
                 firstName: this.state.first_name,
                 lastName: this.state.last_name,
                 email: this.state.email,
-                password: this.state.password
+                password: this.state.password,
+                service: this.state.service
             }
-            console.log("Success");
+
+             register(value,(error,response)=>
+            {
+                if(error)
+                {
+                    console.log('Error-->',error);
+                }
+                else
+                {   
+                    console.log('Response-->',response)
+                }
+            });
+
         }
+        event.preventDefault();
     }
 
     render() {
@@ -97,7 +113,7 @@ class Register extends Component {
                                     <TextField id='password'
                                         label='Password'
                                         autoComplete='off'
-                                        type="password"
+                                        type='password'
                                         name='password'
                                         margin='normal'
                                         variant='outlined'
@@ -109,7 +125,7 @@ class Register extends Component {
                                     <TextField id='confirm_password'
                                         label='Confirm Password'
                                         autoComplete='off'
-                                        type="password"
+                                        type='password'
                                         name='confirm_password'
                                         margin='normal'
                                         variant='outlined'
