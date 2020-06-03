@@ -29,12 +29,12 @@
 }
 
 #firstname,#password{
-    width: 200px;
+    width: 190px;
     height: 20px;   
 }
 
 #lastname,#confirm_password{
-    width: 200px;
+    width: 190px;
     height: 20px;   
 }
 
@@ -44,11 +44,11 @@ float: left;
         
 .last,.confirm{
 float: right;
-margin-right: 20px;
+position: relative; right: 3em;
 }
 
 #email{
-width:445px;
+width:424px;
 height: 20px;
 }
  
@@ -62,5 +62,10 @@ font-size: 14px;
 float: left;
 margin-left: 370px;
 margin-top:25px;
+}
+
+.login{
+    float: left;
+    position: relative; top : 3.2em;
 }
         

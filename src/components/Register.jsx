@@ -5,6 +5,46 @@ import Button from '@material-ui/core/Button';
 import './Register.css';
 
 class Register extends Component {
+
+    constructor(props) {
+
+        super(props);
+        this.state = {
+            first_name: '',
+            last_name: '',
+            email: '',
+            password: '',
+            confirm_password: ''
+        }
+    }
+
+    input = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    submit = (event) => {
+        if (this.state.password !== this.state.confirm_password) {
+            this.setState({
+                password: '',
+                confirm_password: ''
+            })
+            console.log('Passwords do not match');
+        }
+        else {
+
+            let value =
+            {
+                firstName: this.state.first_name,
+                lastName: this.state.last_name,
+                email: this.state.email,
+                password: this.state.password
+            }
+            console.log("Success");
+        }
+    }
+
     render() {
         return (
             <div>
@@ -25,7 +65,8 @@ class Register extends Component {
                                         name='first_name'
                                         margin='normal'
                                         variant='outlined'
-                                    >
+                                        value={this.state.first_name}
+                                        onChange={(event) => this.input(event)}>
                                     </TextField>
                                 </div>
                                 <div className='last'>
@@ -35,7 +76,8 @@ class Register extends Component {
                                         name='last_name'
                                         margin='normal'
                                         variant='outlined'
-                                    >
+                                        value={this.state.last_name}
+                                        onChange={(event) => this.input(event)}>
                                     </TextField>
                                 </div>
                             </div>
@@ -46,10 +88,10 @@ class Register extends Component {
                                     autoComplete='off'
                                     margin='normal'
                                     variant='outlined'
-                                    >
+                                    value={this.state.email}
+                                    onChange={(event) => this.input(event)}>
                                 </TextField>
                             </div>
-
                             <div className='passwordDiv'>
                                 <div className='password'>
                                     <TextField id='password'
@@ -59,7 +101,8 @@ class Register extends Component {
                                         name='password'
                                         margin='normal'
                                         variant='outlined'
-                                        >
+                                        value={this.state.password}
+                                        onChange={(event) => this.input(event)}>
                                     </TextField>
                                 </div>
                                 <div className='confirm'>
@@ -70,7 +113,8 @@ class Register extends Component {
                                         name='confirm_password'
                                         margin='normal'
                                         variant='outlined'
-                                        >
+                                        value={this.state.confirm_password}
+                                        onChange={(event) => this.input(event)}>
                                     </TextField>
                                 </div>
                             </div>
@@ -87,7 +131,7 @@ class Register extends Component {
                                     color='primary'
                                     margin='normal'
                                     variant='contained'
-                                >Submit</Button>
+                                    onClick={(event) => this.submit(event)}>Submit</Button>
                             </div>
                         </div>
                     </div>
