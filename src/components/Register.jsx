@@ -5,6 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Register.css';
 
+var emailPattern =/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
+passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
+
 class Register extends Component {
 
     constructor(props) {
@@ -16,7 +19,7 @@ class Register extends Component {
             email: '',
             password: '',
             confirm_password: '',
-            service: 'advanced'
+            service: 'advanced',
         }
     }
 
@@ -27,12 +30,19 @@ class Register extends Component {
     }
 
     submit = (event) => {
-        if (this.state.password !== this.state.confirm_password) {
+        
+        if(!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password))
+        {
+            alert('Email or password fields are invalid');
+            return;
+        }
+        else if (this.state.password !== this.state.confirm_password) {
             this.setState({
                 password: '',
                 confirm_password: ''
             })
             console.log('Passwords do not match');
+            return;
         }
         else {
 
