@@ -96,7 +96,6 @@ class Login extends Component {
                   variant='contained'
                   onClick={(event) => this.submit(event)}
                 > Submit</Button>
-
               </div>
             </div>
             <div className='register'>

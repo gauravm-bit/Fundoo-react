@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+// const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api/user'
+
 export function register(data) {
     return axios({
         method: 'POST',
@@ -36,7 +38,7 @@ export function forgot(data) {
         url: `http://fundoonotes.incubation.bridgelabz.com/api/user/reset`,
         data: data
     }).then(result => {
-        window.location.href = '/reset'
+        window.location.href = '/resetpassword'
         console.log("success");
         return result;
     }).catch(err => {
@@ -45,5 +47,19 @@ export function forgot(data) {
     })
 }
 
+export function reset(data,token) {
+    return axios({
+        method: 'POST',
+        url: `http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password?access_token=${token}`,
+        data: data,
+    }).then(result => {
+        window.location.href = '/'
+        console.log("success");
+        return result;
+    }).catch(err => {
+        console.error("error after api call", err);
+        return err;
+    })
+}
 
 
