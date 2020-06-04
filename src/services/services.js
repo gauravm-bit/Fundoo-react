@@ -30,6 +30,20 @@ export function login(data) {
     })
 }
 
+export function forgot(data) {
+    return axios({
+        method: 'POST',
+        url: `http://fundoonotes.incubation.bridgelabz.com/api/user/reset`,
+        data: data
+    }).then(result => {
+        window.location.href = '/reset'
+        console.log("success");
+        return result;
+    }).catch(err => {
+        console.error("error after api call", err);
+        return err;
+    })
+}
 
 
 
