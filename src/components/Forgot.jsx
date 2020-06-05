@@ -3,10 +3,10 @@ import { forgot } from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-  
+
 import './Forgot.css';
 
-var emailPattern =/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm
+var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm
 
 class Forgot extends Component {
 
@@ -24,10 +24,9 @@ class Forgot extends Component {
     }
 
     submit = (event) => {
-      if(!emailPattern.test(this.state.email))
-        {
+        if (!emailPattern.test(this.state.email)) {
             alert('Enter a proper email address');
-            
+
         }
         else {
 
@@ -35,18 +34,21 @@ class Forgot extends Component {
             {
                 email: this.state.email
             }
-             
-            forgot(value,(error,response)=>
-            {
-                if(error)
-                {
-                    console.log('Error-->',error);
+
+            forgot(value, (error, response) => {
+                if (error) {
+                    console.log('Error-->', error);
                 }
-                else
-                {   
-                    console.log('Response-->',response)
+                else {
+
+                    console.log(response)
+                    alert('Link has been sent to your registered email address');
+                    this.setState({
+                        email: ''
+                    })
+
                 }
-            });   
+            });
         }
     }
 
