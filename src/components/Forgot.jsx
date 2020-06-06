@@ -64,7 +64,7 @@ class Forgot extends Component {
                     </div >
                     <form>
                         <div className="email-position">
-                            <TextField id='email'
+                            <TextField id='forgot-email'
                                 label='Email'
                                 name='email'
                                 autoComplete='off'

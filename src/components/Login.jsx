@@ -27,6 +27,7 @@ class Login extends Component {
   }
 
   submit = (event) => {
+    event.preventDefault();
     if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
       alert('Email or password fields are invalid');
       return;
@@ -43,6 +44,7 @@ class Login extends Component {
 
       login(call)
         .then(res => {
+          console.log(res)
           sessionStorage.setItem('token', res.data.session);
           this.props.history.push('/dashboard')
         })
@@ -51,6 +53,7 @@ class Login extends Component {
         })
 
     }
+    
   }
 
   render() {

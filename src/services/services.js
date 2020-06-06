@@ -17,21 +17,6 @@ export function register(data) {
     })
 }
 
-// export function login(data) {
-//     return axios({
-//         method: 'POST',
-//         url: `http://fundoonotes.incubation.bridgelabz.com/api/user/login`,
-//         data: data
-//     }).then(result => {
-//         window.location.href = '/dashboard'
-//         console.log("success");
-//         return result;
-//     }).catch(err => {
-//         console.error("error after api call", err);
-//         return err;
-//     })
-// }
-
 export function login(request) {
 let response = axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/login',request)
 return response;
