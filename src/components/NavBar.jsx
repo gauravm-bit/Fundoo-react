@@ -1,23 +1,18 @@
 import React from 'react'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import InputBase from '@material-ui/core/InputBase';
-import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import './Dashboard.css'
 import { makeStyles } from '@material-ui/core/styles';
 import {
     AppBar,
     Toolbar,
-    ListItem,
     IconButton,
-    ListItemText,
-    Divider,
-    List,
     Typography,
     Paper,
-    Box,
-    responsiveFontSizes
 } from '@material-ui/core';
 import logo from './keep.png'
 
@@ -63,7 +58,29 @@ const useStyles = makeStyles({
     },
     searchButton: {
         fontSize: '1em'
-    }
+    },
+    cartIcon: {
+        width: 35,
+        height: 35,
+        color: '#757575',
+        cursor: 'pointer',
+        position: "relative",left:70
+    },
+    viewIcon:{
+        width: 35,
+        height: 35,
+        color: '#757575',
+        cursor: 'pointer',
+        position: "relative",left:90
+    },
+    accountCircle:{
+        width: 35,
+        height: 35,
+        color: '#757575',
+        cursor: 'pointer',
+        position: "relative",left:110
+    },
+    
 })
 
 export const NavBar = () => {
@@ -95,16 +112,19 @@ export const NavBar = () => {
                         </Paper>
                     </div>
                     <div>
-                        <IconButton>
-                            <ShoppingCartIcon />
-                        </IconButton>
-                        
-                        <IconButton>
-                        <ViewStreamIcon />
+                        <IconButton >
+                            <ShoppingCartOutlinedIcon
+                                className={classes.cartIcon} />
                         </IconButton>
 
                         <IconButton>
-                          <AccountCircleIcon />
+                            <ViewAgendaOutlinedIcon
+                                className={classes.viewIcon} />
+                        </IconButton>
+
+                        <IconButton>
+                            <AccountCircleIcon
+                                className={classes.accountCircle} />
                         </IconButton>
                     </div>
 
