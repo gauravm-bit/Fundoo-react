@@ -5,8 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Register.css';
 
-var emailPattern =/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
-passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
+var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
+    passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
 
 class Register extends Component {
 
@@ -30,9 +30,8 @@ class Register extends Component {
     }
 
     submit = (event) => {
-        
-        if(!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password))
-        {
+
+        if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
             alert('Email or password fields are invalid');
             return;
         }
@@ -55,20 +54,16 @@ class Register extends Component {
                 service: this.state.service
             }
 
-             register(value,(error,response)=>
-            {
-                if(error)
-                {
-                    console.log('Error-->',error);
-                }
-                else
-                {   
-                    console.log('Response-->',response)
-                }
-            });
-
+            register(value)
+                .then(res => {
+                    console.log(res)
+                    this.props.history.push('/')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
-        event.preventDefault();
+
     }
 
     render() {

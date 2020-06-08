@@ -35,20 +35,17 @@ class Forgot extends Component {
                 email: this.state.email
             }
 
-            forgot(value, (error, response) => {
-                if (error) {
-                    console.log('Error-->', error);
-                }
-                else {
-
-                    console.log(response)
+            forgot(value)
+                .then(res => {
+                    console.log(res)
                     alert('Link has been sent to your registered email address');
                     this.setState({
                         email: ''
                     })
-
-                }
-            });
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }
 

@@ -64,22 +64,26 @@ const useStyles = makeStyles({
         height: 35,
         color: '#757575',
         cursor: 'pointer',
-        position: "relative",left:70
+         
     },
     viewIcon:{
         width: 35,
         height: 35,
         color: '#757575',
         cursor: 'pointer',
-        position: "relative",left:90
+        
     },
     accountCircle:{
         width: 35,
         height: 35,
         color: '#757575',
         cursor: 'pointer',
-        position: "relative",left:110
+       
     },
+    button : {
+        marginLeft: 10,
+        marginRight: 10
+    }
     
 })
 
@@ -111,18 +115,18 @@ export const NavBar = () => {
                             />
                         </Paper>
                     </div>
-                    <div>
-                        <IconButton >
+                    <div className='iconBar'>
+                        <IconButton className={classes.button}>
                             <ShoppingCartOutlinedIcon
                                 className={classes.cartIcon} />
                         </IconButton>
 
-                        <IconButton>
+                        <IconButton className={classes.button}>
                             <ViewAgendaOutlinedIcon
                                 className={classes.viewIcon} />
                         </IconButton>
 
-                        <IconButton>
+                        <IconButton className={classes.button}>
                             <AccountCircleIcon
                                 className={classes.accountCircle} />
                         </IconButton>

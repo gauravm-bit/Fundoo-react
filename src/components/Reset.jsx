@@ -9,7 +9,7 @@ import './Reset.css';
 class Reset extends Component {
 
     constructor(props) {
-        
+
         super(props);
         console.log(this.props.match.params.token);
 
@@ -34,21 +34,22 @@ class Reset extends Component {
             })
             return;
         }
-        let token=this.props.match.params.token;
-      
+        let token = this.props.match.params.token;
+
         let value =
         {
             newPassword: this.state.password
         }
 
-        reset(value,token, (error, response) => {
-            if (error) {
-                console.log('Error-->', error);
-            }
-            else {
-                console.log('Response-->', response)
-            }
-        });
+        reset(value, token)
+            .then(res => {
+                console.log(res)
+                alert('Password has been changed sucessfully');
+                this.props.history.push('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     render() {
