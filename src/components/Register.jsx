@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { register } from '../services/services';
+import Service from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import { Button, IconButton } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import './Register.css';
+import '../scss/Register.scss'
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
     passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
@@ -43,7 +43,7 @@ class Register extends Component {
                 password: '',
                 confirm_password: ''
             })
-            console.log('Passwords do not match');
+            alert('Passwords do not match');
             return;
         }
         else {
@@ -57,7 +57,9 @@ class Register extends Component {
                 service: this.state.service
             }
 
-            register(value)
+            let service = new Service()
+
+            service.register(value)
                 .then(res => {
                     console.log(res)
                     this.props.history.push('/')

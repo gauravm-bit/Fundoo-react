@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { reset } from '../services/services';
+import Service from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import { Button, IconButton } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-
-import './Reset.css';
+import '../scss/Reset.scss'
 
 class Reset extends Component {
 
@@ -27,7 +26,7 @@ class Reset extends Component {
         })
     }
 
-    submit = (event) => {
+    submit = () => {
         if (this.state.password !== this.state.confirm_password) {
             alert('Passwords dont match.Please enter again');
             this.setState({
@@ -43,7 +42,9 @@ class Reset extends Component {
             newPassword: this.state.password
         }
 
-        reset(value, token)
+        let service = new Service()
+
+        service.reset(value, token)
             .then(res => {
                 console.log(res)
                 alert('Password has been changed sucessfully');

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { forgot } from '../services/services';
+import Service from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import './Forgot.css';
+import '../scss/Forgot.scss'
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm
 
@@ -35,7 +35,9 @@ class Forgot extends Component {
                 email: this.state.email
             }
 
-            forgot(value)
+            let service = new Service()
+
+            service.forgot(value)
                 .then(res => {
                     console.log(res)
                     alert('Link has been sent to your registered email address');

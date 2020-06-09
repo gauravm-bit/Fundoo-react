@@ -1,23 +1,56 @@
 import axios from 'axios';
-
 const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api/user'
 
-export function register(request) {
-    let response = axios.post(baseUrl+'/userSignUp', request)
-    return response;
+
+class Service {
+    
+    register(data) {
+        return new Promise((resolve, reject) => {
+            axios.post(baseUrl + '/userSignUp', data)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
+
+    login(data) {
+        return new Promise((resolve, reject) => {
+            axios.post(baseUrl + '/login', data)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
+
+    forgot(data) {
+        return new Promise((resolve, reject) => {
+            axios.post(baseUrl + '/reset', data)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
+
+    reset(data, token) {
+        return new Promise((resolve, reject) => {
+            axios.post(baseUrl + `/reset-password?access_token=${token}`, data)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
 }
 
-export function login(request) {
-    let response = axios.post(baseUrl+'/login', request)
-    return response;
-}
-
-export function forgot(request) {
-    let response = axios.post(baseUrl+'/reset', request)
-    return response;
-}
-
-export function reset(request, token) {
-    let response = axios.post(baseUrl+`/reset-password?access_token=${token}`, request)
-    return response;
-}
+export default Service;

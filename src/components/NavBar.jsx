@@ -5,7 +5,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import InputBase from '@material-ui/core/InputBase';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import './Dashboard.css'
+import '../scss/Dashboard.scss'
 import { makeStyles } from '@material-ui/core/styles';
 import {
     AppBar,
@@ -14,7 +14,7 @@ import {
     Typography,
     Paper,
 } from '@material-ui/core';
-import logo from './keep.png'
+import logo from '../assets/keep.png'
 
 //css styles
 const useStyles = makeStyles({
