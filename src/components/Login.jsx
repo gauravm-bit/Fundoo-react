@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import {Button , IconButton} from '@material-ui/core';
 import { login } from '../services/services';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import './Login.css';
 
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
-  passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
+passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
 
 
 class Login extends Component {
@@ -53,7 +55,13 @@ class Login extends Component {
         })
 
     }
-    
+
+  }
+
+  showPassword(event) {
+    this.setState({
+      show: !this.state.show,
+    })
   }
 
   render() {
@@ -83,7 +91,7 @@ class Login extends Component {
               <TextField className='loginTextField'
                 label='Password'
                 name='password'
-                type='password'
+                type={this.state.show ? 'text' : 'password'}
                 margin='normal'
                 autoComplete='off'
                 variant='outlined'
@@ -91,6 +99,11 @@ class Login extends Component {
                 onChange={(event) => this.input(event)}>
                 >
               </TextField>
+            </div>
+            <div className='loginShowPassword'>
+              <IconButton onClick={(event) => this.showPassword(event)}>
+                {this.state.show ? <VisibilityIcon /> : <VisibilityOffIcon />}
+              </IconButton>
             </div>
           </form>
           <div>

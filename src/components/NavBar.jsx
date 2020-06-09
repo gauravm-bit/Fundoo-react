@@ -21,17 +21,25 @@ const useStyles = makeStyles({
     grow: {
         flexGrow: 1
     },
+    appbar: {
+        height: '100'
+    },
     menuButton: {
         marginRight: '1rem',
         backgroundColor: 'transparent',
-        width: 80,
-        height: 80,
+        width: 50,
+        height: 50,
+        marginBottom:30
     },
     largeIcon: {
-        width: 35,
-        height: 35,
+        width: 30,
+        height: 30,
         color: '#5f6367',
-        cursor: 'pointer'
+        cursor: 'pointer',
+       
+    },
+    iconPart: {
+          position: "relative" , top : '0.8em' 
     },
     logo: {
         marginLeft: "10px",
@@ -47,7 +55,8 @@ const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center',
         backgroundColor: '#f1f3f4',
-        width: 700,
+        width: 750,
+        height: 55
     },
     input: {
         flex: 1,
@@ -60,22 +69,22 @@ const useStyles = makeStyles({
         fontSize: '1em'
     },
     cartIcon: {
-        width: 35,
-        height: 35,
+        width: 30,
+        height: 30,
         color: '#757575',
         cursor: 'pointer',
          
     },
     viewIcon:{
-        width: 35,
-        height: 35,
+        width: 30,
+        height: 30,
         color: '#757575',
         cursor: 'pointer',
         
     },
     accountCircle:{
-        width: 35,
-        height: 35,
+        width: 30,
+        height: 30,
         color: '#757575',
         cursor: 'pointer',
        
@@ -93,6 +102,7 @@ export const NavBar = () => {
         <div className={classes.grow}>
             <AppBar className='appbar' elevation={1} position="fixed" color="inherit">
                 <Toolbar>
+                    <div className ={classes.iconPart}>
                     <IconButton
                         edge='start'
                         color='inherit'
@@ -102,6 +112,7 @@ export const NavBar = () => {
                             className={classes.largeIcon}
                         />
                     </IconButton>
+                    </div>
                     <img className={classes.logo} src={logo} alt="Logo" />
                     <Typography className={classes.titlebar} variant="h6">Fundoo</Typography>
                     <div className={classes.search}>

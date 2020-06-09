@@ -54,3 +54,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 2em;
 }
+
+.loginShowPassword{
+  position: relative; bottom: 3.3em; left: 29em ;
+}

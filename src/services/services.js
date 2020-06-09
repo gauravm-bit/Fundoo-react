@@ -1,23 +1,23 @@
 import axios from 'axios';
 
-// const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api/user'
+const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api/user'
 
 export function register(request) {
-    let response = axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp', request)
+    let response = axios.post(baseUrl+'/userSignUp', request)
     return response;
 }
 
 export function login(request) {
-    let response = axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/login', request)
+    let response = axios.post(baseUrl+'/login', request)
     return response;
 }
 
 export function forgot(request) {
-    let response = axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/reset', request)
+    let response = axios.post(baseUrl+'/reset', request)
     return response;
 }
 
 export function reset(request, token) {
-    let response = axios.post(`http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password?access_token=${token}`, request)
+    let response = axios.post(baseUrl+`/reset-password?access_token=${token}`, request)
     return response;
 }

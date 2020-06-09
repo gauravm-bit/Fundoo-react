@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { register } from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Button, IconButton } from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import './Register.css';
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
@@ -20,6 +22,7 @@ class Register extends Component {
             password: '',
             confirm_password: '',
             service: 'advanced',
+            show: false
         }
     }
 
@@ -29,7 +32,7 @@ class Register extends Component {
         })
     }
 
-    submit = (event) => {
+    submit = () => {
 
         if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
             alert('Email or password fields are invalid');
@@ -64,6 +67,12 @@ class Register extends Component {
                 })
         }
 
+    }
+
+    showPassword(event) {
+        this.setState({
+            show: !this.state.show,
+        })
     }
 
     render() {
@@ -118,7 +127,7 @@ class Register extends Component {
                                     <TextField id='password'
                                         label='Password'
                                         autoComplete='off'
-                                        type='password'
+                                        type={this.state.show?'text':'password'}
                                         name='password'
                                         margin='normal'
                                         variant='outlined'
@@ -130,13 +139,18 @@ class Register extends Component {
                                     <TextField id='confirm_password'
                                         label='Confirm Password'
                                         autoComplete='off'
-                                        type='password'
+                                        type={this.state.show ? 'text' : 'password'}
                                         name='confirm_password'
                                         margin='normal'
                                         variant='outlined'
                                         value={this.state.confirm_password}
                                         onChange={(event) => this.input(event)}>
                                     </TextField>
+                                </div>
+                                <div className='registerShowPassword'>
+                                    <IconButton onClick={(event) => this.showPassword(event)}>
+                                        {this.state.show ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                    </IconButton>
                                 </div>
                             </div>
                         </form>

@@ -68,3 +68,7 @@ margin-top:25px;
     float: left;
     position: relative; top : 3.2em;
 }    
+
+.registerShowPassword{
+    position: relative; top: 1.8em; left:15em ;
+}

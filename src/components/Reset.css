@@ -34,8 +34,11 @@
 }
 .resetButton {
     margin-top: 3%;
-    position: relative; left:37%;
+    position: relative; left:37%; bottom: 3em;
 }
 
+.resetShowPassword {
+    position: relative; bottom:3.7em; left: 21.8em;
+}
  
  

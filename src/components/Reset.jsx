@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { reset } from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Button, IconButton } from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 import './Reset.css';
 
@@ -52,6 +54,12 @@ class Reset extends Component {
             })
     }
 
+    showPassword(event) {
+        this.setState({
+            show: !this.state.show,
+        })
+    }
+
     render() {
         return (
             <div>
@@ -68,7 +76,7 @@ class Reset extends Component {
                                 <TextField id='r-password'
                                     label='Password'
                                     autoComplete='off'
-                                    type='password'
+                                    type={this.state.show ? 'text' : 'password'}
                                     name='password'
                                     margin='normal'
                                     variant='outlined'
@@ -78,13 +86,18 @@ class Reset extends Component {
                                 <TextField id='r-confirm_password'
                                     label='Confirm Password'
                                     autoComplete='off'
-                                    type='password'
+                                    type={this.state.show ? 'text' : 'password'}
                                     name='confirm_password'
                                     margin='normal'
                                     variant='outlined'
                                     value={this.state.confirm_password}
                                     onChange={(event) => this.input(event)}>
                                 </TextField>
+                            </div>
+                            <div className='resetShowPassword'>
+                                <IconButton onClick={(event) => this.showPassword(event)}>
+                                    {this.state.show ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                </IconButton>
                             </div>
                         </div>
                         <div>
