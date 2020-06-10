@@ -73,13 +73,13 @@ class Forgot extends Component {
                                 onChange={(event) => this.input(event)}>
                             </TextField>
                         </div>
-                        <div className='submitbutton' >
-                            <Button
-                                color='primary'
-                                margin='normal'
-                                variant='contained'
-                                onClick={(event) => this.submit(event)}>Submit</Button>
-                        </div>
+                            <div className='submitbutton' >
+                                <Button
+                                    color='primary'
+                                    margin='normal'
+                                    variant='contained'
+                                    onClick={(event) => this.submit(event)}>Submit</Button>
+                            </div>
                     </form>
                 </Card>
 

@@ -8,7 +8,8 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import '../scss/Register.scss'
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
-    passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
+    passwordPattern = /^[a-zA-Z0-9]{6,20}$/,
+    namePattern = /[a-zA-Z]{1,10}/g
 
 class Register extends Component {
 
@@ -34,7 +35,10 @@ class Register extends Component {
 
     submit = () => {
 
-        if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
+        if(!namePattern.test(this.state.first_name) || !namePattern.test(this.state.last_name)){
+            alert('Firstname or lastname are invalid')
+        }      
+     else if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
             alert('Email or password fields are invalid');
             return;
         }

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import InputBase from '@material-ui/core/InputBase';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 import '../scss/Dashboard.scss'
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     AppBar,
     Toolbar,
@@ -15,9 +17,9 @@ import {
     Paper,
 } from '@material-ui/core';
 import logo from '../assets/keep.png'
+import Service from '../services/services';
 
-//css styles
-const useStyles = makeStyles({
+const useStyles = {
     grow: {
         flexGrow: 1
     },
@@ -29,17 +31,17 @@ const useStyles = makeStyles({
         backgroundColor: 'transparent',
         width: 50,
         height: 50,
-        marginBottom:30
+        marginBottom: 30
     },
     largeIcon: {
         width: 30,
         height: 30,
         color: '#5f6367',
         cursor: 'pointer',
-       
+
     },
     iconPart: {
-          position: "relative" , top : '0.8em' 
+        position: "relative", top: '0.8em'
     },
     logo: {
         marginLeft: "10px",
@@ -73,79 +75,129 @@ const useStyles = makeStyles({
         height: 30,
         color: '#757575',
         cursor: 'pointer',
-         
+
     },
-    viewIcon:{
+    viewIcon: {
         width: 30,
         height: 30,
         color: '#757575',
         cursor: 'pointer',
-        
+
     },
-    accountCircle:{
+    accountCircle: {
         width: 30,
         height: 30,
         color: '#757575',
         cursor: 'pointer',
-       
     },
-    button : {
+    button: {
         marginLeft: 10,
         marginRight: 10
     }
-    
-})
-
-export const NavBar = () => {
-    const classes = useStyles();
-    return (
-        <div className={classes.grow}>
-            <AppBar className='appbar' elevation={1} position="fixed" color="inherit">
-                <Toolbar>
-                    <div className ={classes.iconPart}>
-                    <IconButton
-                        edge='start'
-                        color='inherit'
-                        className={classes.menuButton}
-                    >
-                        <MenuIcon
-                            className={classes.largeIcon}
-                        />
-                    </IconButton>
-                    </div>
-                    <img className={classes.logo} src={logo} alt="Logo" />
-                    <Typography className={classes.titlebar} variant="h6">Fundoo</Typography>
-                    <div className={classes.search}>
-                        <Paper component="form" className={classes.root}>
-                            <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                                <SearchIcon className={classes.searchButton} />
-                            </IconButton>
-                            <InputBase
-                                className={classes.input}
-                                placeholder="Search"
-                            />
-                        </Paper>
-                    </div>
-                    <div className='iconBar'>
-                        <IconButton className={classes.button}>
-                            <ShoppingCartOutlinedIcon
-                                className={classes.cartIcon} />
-                        </IconButton>
-
-                        <IconButton className={classes.button}>
-                            <ViewAgendaOutlinedIcon
-                                className={classes.viewIcon} />
-                        </IconButton>
-
-                        <IconButton className={classes.button}>
-                            <AccountCircleIcon
-                                className={classes.accountCircle} />
-                        </IconButton>
-                    </div>
-
-                </Toolbar>
-            </AppBar >
-        </div >
-    )
 }
-export default NavBar;
+
+export default withStyles(useStyles)(
+    class NavBar extends Component {
+
+        state = {
+            anchorEl: null,
+        };
+
+        handleProfileMenuOpen = event => {
+            this.setState({ anchorEl: event.currentTarget });
+        };
+        handleMenuClose = () => {
+            this.setState({ anchorEl: null });
+        };
+
+
+
+        logOut = () => {
+            let service = new Service()
+            service.logout()
+                .then(res => {
+                    console.log(res)
+                    sessionStorage.removeItem('token');
+                    this.props.history.push('/')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        };
+
+
+        render() {
+            const { classes } = this.props;
+            const { anchorEl } = this.state;
+            const isMenuOpen = Boolean(anchorEl);
+
+            const renderMenu = (
+                <Menu
+                    anchorEl={anchorEl}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    open={isMenuOpen}
+                    onClose={this.handleMenuClose}
+                >
+                    <MenuItem onClick={this.logOut}>Logout</MenuItem>
+                </Menu>
+            );
+            return (
+                <div className={classes.grow} >
+                    <AppBar className='appbar' elevation={1} position="fixed" color="inherit">
+                        <Toolbar>
+                            <div className={classes.iconPart}>
+                                <IconButton
+                                    edge='start'
+                                    color='inherit'
+                                    onClick={()=>this.props.handleDrawer()}
+                                    className={classes.menuButton}
+                                >
+                                    <MenuIcon
+                                        className={classes.largeIcon}
+                                    />
+                                </IconButton>
+                            </div>
+                            <img className={classes.logo} src={logo} alt="Logo" />
+                            <Typography className={classes.titlebar} variant="h6">Fundoo</Typography>
+                            <div className={classes.search}>
+                                <Paper component="form" className={classes.root}>
+                                    <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                                        <SearchIcon className={classes.searchButton} />
+                                    </IconButton>
+                                    <InputBase
+                                        className={classes.input}
+                                        placeholder="Search"
+                                    />
+                                </Paper>
+                            </div>
+                            <div className='iconBar'>
+                                <IconButton className={classes.button}>
+                                    <ShoppingCartOutlinedIcon
+                                        className={classes.cartIcon} />
+                                </IconButton>
+
+                                <IconButton className={classes.button}>
+                                    <ViewAgendaOutlinedIcon
+                                        className={classes.viewIcon} />
+                                </IconButton>
+
+                                <IconButton className={classes.button}
+                                    edge="end"
+                                    aria-label="account user"
+                                    aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                                    onClick={this.handleProfileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <AccountCircleIcon
+                                        className={classes.accountCircle} />
+                                </IconButton>
+                            </div>
+                        </Toolbar>
+                    </AppBar>
+                    {renderMenu}
+                </div >
+            )
+        }
+    }
+)

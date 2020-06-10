@@ -51,6 +51,20 @@ class Service {
                 })
         })
     }
+
+    logout(token) {
+        return new Promise((resolve, reject) => {
+            axios.post(baseUrl + `/logout?access_token=${token}`)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
 }
+
+
 
 export default Service;
