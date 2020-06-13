@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import InputBase from '@material-ui/core/InputBase';
 import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
+import AppsIcon from '@material-ui/icons/Apps';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -18,6 +19,7 @@ import {
 } from '@material-ui/core';
 import logo from '../assets/keep.png'
 import Service from '../services/services';
+const Services = new Service();
 
 const useStyles = {
     grow: {
@@ -110,15 +112,20 @@ export default withStyles(useStyles)(
             this.setState({ anchorEl: null });
         };
 
+        toggleButton = (event) => {
+            this.setState({
+                toggle: !this.state.toggle,
+            })
+        }
+
 
 
         logOut = () => {
-            let service = new Service()
-            service.logout()
+            Services.logout()
                 .then(res => {
-                    console.log(res)
+                    // console.log(this.props.props.history)
                     sessionStorage.removeItem('token');
-                    this.props.history.push('/')
+                    this.props.props.history.push('/')
                 })
                 .catch(err => {
                     console.log(err)
@@ -150,7 +157,7 @@ export default withStyles(useStyles)(
                                 <IconButton
                                     edge='start'
                                     color='inherit'
-                                    onClick={()=>this.props.handleDrawer()}
+                                    onClick={() => this.props.handleDrawer()}
                                     className={classes.menuButton}
                                 >
                                     <MenuIcon
@@ -177,9 +184,11 @@ export default withStyles(useStyles)(
                                         className={classes.cartIcon} />
                                 </IconButton>
 
-                                <IconButton className={classes.button}>
-                                    <ViewAgendaOutlinedIcon
-                                        className={classes.viewIcon} />
+                                <IconButton className={classes.button}
+                                    onClick={(event) => this.toggleButton(event)}>
+                                    {this.state.toggle ? <ViewAgendaOutlinedIcon
+                                        className={classes.viewIcon} /> : <AppsIcon className={classes.viewIcon}/>}
+                                     
                                 </IconButton>
 
                                 <IconButton className={classes.button}

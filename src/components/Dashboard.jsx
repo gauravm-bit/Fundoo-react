@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar'
 import Drawer from './Drawer'
+import CreateNote from '../components/CreateNote'
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
@@ -98,7 +99,7 @@ class Dashboard extends Component {
       <div>
         <MuiThemeProvider theme={theme}>
           <div>
-            <NavBar
+            <NavBar props={this.props}
               handleDrawer={this.handleDrawerOpen}
             />
           </div>
@@ -106,6 +107,9 @@ class Dashboard extends Component {
             <Drawer
               getValue={this.state.openDrawer}
             ></Drawer>
+          </div>
+          <div>
+          <CreateNote />
           </div>
         </MuiThemeProvider>
       </div>

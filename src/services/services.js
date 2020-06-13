@@ -52,9 +52,9 @@ class Service {
         })
     }
 
-    logout(token) {
+    logout() {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/logout?access_token=${token}`)
+            axios.post(baseUrl + `/logout?access_token=${sessionStorage.getItem('token')}`)
                 .then((response) => {
                     resolve(response)
                 })

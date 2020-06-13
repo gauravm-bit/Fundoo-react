@@ -48,7 +48,7 @@ class Login extends Component {
       service.login(call)
         .then(res => {
           console.log(res)
-          sessionStorage.setItem('token', res.data.session);
+          sessionStorage.setItem('token', res.data.id);
           this.props.history.push('/dashboard')
         })
         .catch(err => {
@@ -81,7 +81,7 @@ class Login extends Component {
                 label='Email'
                 name='email'
                 margin='normal'
-                autoComplete='off'
+                autoComplete='email'
                 variant='outlined'
                 value={this.state.email}
                 onChange={(event) => this.input(event)}>
