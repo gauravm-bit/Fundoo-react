@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import {Button , IconButton} from '@material-ui/core';
-import Service from '../services/services';
-
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import '../scss/Login.scss'
+import Service from '../services/services';
+const service = new Service()
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
 passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
@@ -44,12 +44,12 @@ class Login extends Component {
       console.log("sucess");
       console.log(call)
 
-      let service = new Service()
+      
       service.login(call)
         .then(res => {
           console.log(res)
           sessionStorage.setItem('token', res.data.id);
-          this.props.history.push('/dashboard')
+          this.props.history.push('/dashboard/notes')
         })
         .catch(err => {
           console.log(err)

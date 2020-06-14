@@ -1,12 +1,12 @@
 import axios from 'axios';
-const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api/user'
-
+const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api'
+const token = sessionStorage.getItem('token')
 
 class Service {
     
     register(data) {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + '/userSignUp', data)
+            axios.post(baseUrl + '/user/userSignUp', data)
                 .then((response) => {
                     resolve(response)
                 })
@@ -18,7 +18,7 @@ class Service {
 
     login(data) {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + '/login', data)
+            axios.post(baseUrl + '/user/login', data)
                 .then((response) => {
                     resolve(response)
                 })
@@ -30,7 +30,7 @@ class Service {
 
     forgot(data) {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + '/reset', data)
+            axios.post(baseUrl + '/user/reset', data)
                 .then((response) => {
                     resolve(response)
                 })
@@ -42,7 +42,7 @@ class Service {
 
     reset(data, token) {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/reset-password?access_token=${token}`, data)
+            axios.post(baseUrl + `/user/reset-password?access_token=${token}`, data)
                 .then((response) => {
                     resolve(response)
                 })
@@ -54,7 +54,31 @@ class Service {
 
     logout() {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/logout?access_token=${sessionStorage.getItem('token')}`)
+            axios.post(baseUrl + `/user/logout?access_token=${token}`)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
+
+    addNote(note) {
+        return new Promise((resolve, reject) => {
+            axios.post(baseUrl + `/notes/addNotes?access_token=${token}`,note)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
+
+    getNotes() {
+        return new Promise((resolve, reject) => {
+            axios.get(baseUrl + `/notes/getNotesList?access_token=${token}`)
                 .then((response) => {
                     resolve(response)
                 })
