@@ -100,11 +100,12 @@ class Dashboard extends Component {
         <MuiThemeProvider theme={theme}>
           <div>
             <NavBar props={this.props}
-              handleDrawer={this.handleDrawerOpen}
+              handleDrawer={this.handleDrawerOpen }
             />
           </div>
-          <div>
+          <div >
             <Drawer
+
               getValue={this.state.openDrawer}
             ></Drawer>
           </div>

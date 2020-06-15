@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, TextField, Button, Tooltip } from '@material-ui/core';
+import { Card, TextField, Tooltip } from '@material-ui/core';
 import Icons from './Icon'
 import '../scss/CreateNote.scss'
 import Service from '../services/services';
@@ -73,7 +73,7 @@ class CreateNote extends Component {
             <div>
                 <div>
                     {this.state.toggleCards ?
-                        <Card className="OpenCard" vairant="outlined" style={{ backgroundColor: this.state.color }} >
+                        <Card className="OpenCard" variant="outlined" >
                             <div className="title">
                                 <div>
                                     <TextField
@@ -125,7 +125,7 @@ class CreateNote extends Component {
 
                         </Card>
                         :
-                        <Card className="ClosedCard" vairant="outlined" onClick={(event) => this.toggleView(event)} >
+                        <Card className="ClosedCard" variant="outlined" onClick={(event) => this.toggleView(event)} >
                             <div id="inputField">
                                 <TextField
                                     id='closeText'
