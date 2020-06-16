@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button, IconButton } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import Snackbar from '@material-ui/core/Snackbar';
 import '../scss/Reset.scss'
 
 class Reset extends Component {
@@ -16,8 +17,16 @@ class Reset extends Component {
 
         this.state = {
             password: '',
-            confirm_passwword: ''
+            confirm_passwword: '',
+            snackbaropen: false,
+            snackbarmsg: ''
         }
+        this.submit = this.submit.bind(this)
+
+    }
+
+    snackbarClose = (event) => {
+        this.setState({ snackbaropen: false })
     }
 
     input = (event) => {
@@ -28,7 +37,8 @@ class Reset extends Component {
 
     submit = () => {
         if (this.state.password !== this.state.confirm_password) {
-            alert('Passwords dont match.Please enter again');
+            //  alert('Passwords dont match.Please enter again');
+            this.setState({ snackbaropen: true, snackbarmsg: 'Passwords dont match.Please enter again' })
             this.setState({
                 password: '',
                 confirm_password: ''
@@ -47,7 +57,9 @@ class Reset extends Component {
         service.reset(value, token)
             .then(res => {
                 console.log(res)
-                alert('Password has been changed sucessfully');
+              //  alert('Password has been changed sucessfully');
+                this.setState({ snackbaropen: true, snackbarmsg: 'Password has been changed sucessfully' })
+
                 this.props.history.push('/')
             })
             .catch(err => {
@@ -112,6 +124,23 @@ class Reset extends Component {
                         </div>
                     </form>
                 </Card>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={this.state.snackbaropen}
+                    autoHideDuration={3000}
+                    onClose={this.snackbarClose}
+                    message={<span id="message-id">{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            onClick={this.snackbarClose}
+                        >
+                            x
+                        </IconButton>
+                    ]}
+                />
             </div>
         )
     }

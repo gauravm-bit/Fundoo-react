@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Service from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Button, IconButton } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import '../scss/Forgot.scss'
 
@@ -13,8 +14,15 @@ class Forgot extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: ''
+            email: '',
+            snackbaropen: false,
+            snackbarmsg: ''
         }
+        this.submit = this.submit.bind(this)
+    }
+
+    snackbarClose = (event) => {
+        this.setState({ snackbaropen: false })
     }
 
     input = (event) => {
@@ -40,7 +48,8 @@ class Forgot extends Component {
             service.forgot(value)
                 .then(res => {
                     console.log(res)
-                    alert('Link has been sent to your registered email address');
+                    // alert('Link has been sent to your registered email address');
+                    this.setState({snackbaropen:true,snackbarmsg:'Link has been sent to your registered email address'})
                     this.setState({
                         email: ''
                     })
@@ -73,16 +82,32 @@ class Forgot extends Component {
                                 onChange={(event) => this.input(event)}>
                             </TextField>
                         </div>
-                            <div className='submitbutton' >
-                                <Button
-                                    color='primary'
-                                    margin='normal'
-                                    variant='contained'
-                                    onClick={(event) => this.submit(event)}>Submit</Button>
-                            </div>
+                        <div className='submitbutton' >
+                            <Button
+                                color='primary'
+                                margin='normal'
+                                variant='contained'
+                                onClick={(event) => this.submit(event)}>Submit</Button>
+                        </div>
                     </form>
                 </Card>
-
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={this.state.snackbaropen}
+                    autoHideDuration={3000}
+                    onClose={this.snackbarClose}
+                    message={<span id="message-id">{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            onClick={this.snackbarClose}
+                        >
+                            x
+                        </IconButton>
+                    ]}
+                />
             </div>
         )
     }

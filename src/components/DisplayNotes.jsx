@@ -2,14 +2,37 @@ import React, { Component } from 'react';
 import { Card, Tooltip } from '@material-ui/core';
 import Icons from './Icon'
 import { TextField } from '@material-ui/core';
+import Service from '../services/services';
 import '../scss/Display.scss'
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+const service = new Service()
+
 
 const theme = createMuiTheme({
     
 });
 
 class DisplayNote extends Component {
+   
+
+    archiveNotes=()=>{
+        let data = {
+            id: this.props.note.id,
+            isArchived : true
+        }
+        console.log(data);
+        
+        service.archiveNotes(data)
+        .then(res=>{
+            this.props.getNotes()
+        })
+        .catch(err=>{
+          console.log(err);
+          
+        })
+    }
+
+
 
     render() {
         return (
@@ -60,7 +83,9 @@ class DisplayNote extends Component {
                                 disableUnderline: true
                             }} />
                     </div>
-                    < Icons />
+                    < Icons note={this.props.note}
+                        archive = {this.archiveNotes}
+                    />
                 </Card>
                 </MuiThemeProvider>
             </div>

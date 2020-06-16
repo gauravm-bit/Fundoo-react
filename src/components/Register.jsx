@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import { Button, IconButton } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Snackbar from '@material-ui/core/Snackbar';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import '../scss/Register.scss'
 
@@ -23,8 +24,15 @@ class Register extends Component {
             password: '',
             confirm_password: '',
             service: 'advanced',
-            show: false
+            show: false,
+            snackbaropen: false,
+            snackbarmsg: ''
         }
+        this.submit = this.submit.bind(this)
+    }
+
+    snackbarClose = (event) => {
+        this.setState({ snackbaropen: false })
     }
 
     input = (event) => {
@@ -35,11 +43,13 @@ class Register extends Component {
 
     submit = () => {
 
-        if(!namePattern.test(this.state.first_name) || !namePattern.test(this.state.last_name)){
-            alert('Firstname or lastname are invalid')
-        }      
-     else if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
-            alert('Email or password fields are invalid');
+        if (!namePattern.test(this.state.first_name) || !namePattern.test(this.state.last_name)) {
+            // alert('Firstname or lastname are invalid')
+            this.setState({snackbaropen:true,snackbarmsg:'Firstname or lastname are invaild'})
+        }
+        else if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
+            // alert('Email or password fields are invalid');
+            this.setState({snackbaropen:true,snackbarmsg:'Email or password fields are invalid'})
             return;
         }
         else if (this.state.password !== this.state.confirm_password) {
@@ -47,7 +57,8 @@ class Register extends Component {
                 password: '',
                 confirm_password: ''
             })
-            alert('Passwords do not match');
+            // alert('Passwords do not match');
+            this.setState({snackbaropen:true,snackbarmsg:'Passwords do not match'})
             return;
         }
         else {
@@ -66,6 +77,7 @@ class Register extends Component {
             service.register(value)
                 .then(res => {
                     console.log(res)
+                    this.setState({snackbaropen:true,snackbarmsg:'Registered successfully'})
                     this.props.history.push('/')
                 })
                 .catch(err => {
@@ -133,7 +145,7 @@ class Register extends Component {
                                     <TextField id='password'
                                         label='Password'
                                         autoComplete='off'
-                                        type={this.state.show?'text':'password'}
+                                        type={this.state.show ? 'text' : 'password'}
                                         name='password'
                                         margin='normal'
                                         variant='outlined'
@@ -177,6 +189,23 @@ class Register extends Component {
                         </div>
                     </div>
                 </Card>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={this.state.snackbaropen}
+                    autoHideDuration={3000}
+                    onClose={this.snackbarClose}
+                    message={<span id="message-id">{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            onClick={this.snackbarClose}
+                        >
+                            x
+                        </IconButton>
+                    ]}
+                />
             </div>
         )
     }

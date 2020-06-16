@@ -1,6 +1,5 @@
 import axios from 'axios';
 const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api'
-const token = sessionStorage.getItem('token')
 
 class Service {
     
@@ -54,7 +53,7 @@ class Service {
 
     logout() {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/user/logout?access_token=${token}`)
+            axios.post(baseUrl + `/user/logout?access_token=${sessionStorage.getItem('token')}`)
                 .then((response) => {
                     resolve(response)
                 })
@@ -66,7 +65,7 @@ class Service {
 
     addNote(note) {
         return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/notes/addNotes?access_token=${token}`,note)
+            axios.post(baseUrl + `/notes/addNotes?access_token=${sessionStorage.getItem('token')}`,note)
                 .then((response) => {
                     resolve(response)
                 })
@@ -78,7 +77,19 @@ class Service {
 
     getNotes() {
         return new Promise((resolve, reject) => {
-            axios.get(baseUrl + `/notes/getNotesList?access_token=${token}`)
+            axios.get(baseUrl + `/notes/getNotesList?access_token=${sessionStorage.getItem('token')}`)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
+
+    archiveNotes(data) {
+        return new Promise((resolve, reject) => {
+            axios.post(baseUrl + `/notes/archiveNotes?access_token=${sessionStorage.getItem('token')}`,data)
                 .then((response) => {
                     resolve(response)
                 })
