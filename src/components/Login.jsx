@@ -5,12 +5,52 @@ import { Button, IconButton } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import '../scss/Login.scss'
 import Service from '../services/services';
 const service = new Service()
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
   passwordPattern = /^[a-zA-Z0-9]{6,20}$/;
+
+const theme = createMuiTheme({
+  overrides: {
+    'MuiInputBase': {
+      'input': {
+        height: "1.5em",
+        width:"9em",
+        padding: "8px 12px 9px 12px",
+      },
+      'root': {
+        display: 'flex',
+        marginLeft: '8px',
+        marginRight:'8px',
+        cursor: 'text'
+      }
+    },
+    'MuiPaper': {
+      'elevation4': {
+        boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.1)'
+      },
+      'rounded': {
+        borderRadius: '10px',
+        border: '1px solid lightgrey'
+      }
+    },
+    'MuiButton': {
+      'root': {
+        backgroundColor: 'transparent'
+      }
+    },
+    'MuiOutlinedInput-input': {
+      'input': {
+      width: '24em',
+      padding: '18.5px 14px'
+      }
+  }
+
+  }
+});
 
 
 class Login extends Component {
@@ -40,7 +80,7 @@ class Login extends Component {
     event.preventDefault();
     if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
       // alert('Email or password fields are invalid');
-      this.setState({snackbaropen:true,snackbarmsg:'Email or password invaild'})
+      this.setState({ snackbaropen: true, snackbarmsg: 'Email or password invaild' })
       return;
     }
     else {
@@ -56,14 +96,14 @@ class Login extends Component {
 
       service.login(call)
         .then(res => {
-          this.setState({snackbaropen:true,snackbarmsg:'logged in successfully'})
-          console.log('login' + res)
-         
+          this.setState({ snackbaropen: true, snackbarmsg: 'logged in successfully' })
+          console.log(res)
+
           sessionStorage.setItem('token', res.data.id);
           this.props.history.push('/dashboard/notes')
           if (res.status === 200) {
             // alert('Logged in successfully')
-           this.setState({snackbaropen:true,snackbarmsg:'logged in successfully'})
+            this.setState({ snackbaropen: true, snackbarmsg: 'logged in successfully' })
           }
         })
         .catch(err => {
@@ -83,6 +123,7 @@ class Login extends Component {
   render() {
     return (
       <div>
+        <MuiThemeProvider theme={theme}>
         <Card className="loginCard" vairant="outlined">
           <div className='logintitle'>
             <h3 className="loginHead">Fundoo</h3>
@@ -146,7 +187,7 @@ class Login extends Component {
           onClose={this.snackbarClose}
           message={<span id="message-id">{this.state.snackbarmsg}</span>}
           action={[
-            <IconButton 
+            <IconButton
               key="close"
               aria-label="Close"
               color="inherit"
@@ -156,6 +197,7 @@ class Login extends Component {
             </IconButton>
           ]}
         />
+        </MuiThemeProvider>
       </div>
     );
   }

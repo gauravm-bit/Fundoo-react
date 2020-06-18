@@ -6,17 +6,6 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
   overrides: {
-    'MuiInputBase': {
-      'input': {
-        height: "2.1875em",
-        padding: "10px 12px 9px 0",
-      },
-      'root': {
-        display: 'flex',
-        marginLeft: '20px',
-        cursor: 'pointer'
-      }
-    },
     'MuiDrawer': {
       'paper': {
         top: "81px",

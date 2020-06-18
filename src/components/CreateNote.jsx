@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, TextField, Tooltip } from '@material-ui/core';
+import { Card, TextField, Tooltip,Button } from '@material-ui/core';
 import Icons from './Icon'
 import '../scss/CreateNote.scss'
 import Service from '../services/services';
@@ -50,21 +50,23 @@ class CreateNote extends Component {
                 isArchived: this.state.isArchive
             }
             console.log(note)
-            service.addNote(note).then((data)=>{
+            service.addNote(note).then((data) => {
                 console.log(data)
                 this.props.getNotes()
             })
-            .catch((err)=>{
-                console.log(err)
-            })
+                .catch((err) => {
+                    console.log(err)
+                })
         }
         this.setState({
             toggleCards: !this.state.toggleCards,
             title: '',
             description: ''
-        }, () => {
-            console.log(this.state.toggleCards);
-        })
+        }
+        // , () => {
+        //     console.log(this.state.toggleCards);
+        //}
+        )
     }
 
 
@@ -118,10 +120,14 @@ class CreateNote extends Component {
                                         disableUnderline: true
                                     }} />
                             </div>
-                            < Icons />
-                            <div id='button'>
-                                <button onClick={() => this.createNote()} className='button'>Close</button>
+
+                            <div>
+                                < Icons />
+                                <div id='button'>
+                                    <Button onClick={() => this.createNote()} className='button'>Close</Button>
+                                </div>
                             </div>
+
 
                         </Card>
                         :

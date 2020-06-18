@@ -23,7 +23,7 @@ class Register extends Component {
             email: '',
             password: '',
             confirm_password: '',
-            service: 'advanced',
+            service: 'advance',
             show: false,
             snackbaropen: false,
             snackbarmsg: ''

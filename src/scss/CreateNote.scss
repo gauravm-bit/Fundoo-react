@@ -22,10 +22,11 @@
     background-color: rgba(0,0,0,.2);
     text-align: initial;
     border-width: 1px 1px 1px 6px;
-    box-shadow: 5px 5px #c7c5c5;;
+    box-shadow: 3px 3px #c7c5c5;;
     margin-left: auto;
     margin-right: auto;
     position: relative; top: 7em; 
+    height: 160px;
 }
 
 #title,#description{
@@ -51,7 +52,7 @@
 
 .button{
     margin-right: 30px;
-    font-size: 15px;
+    font-size: 2px;
     font-family: 'Google Sans',Roboto,Arial,sans-serif;
     color: rgba(0,0,0,0.87);
     line-height: 1.25rem;
@@ -60,14 +61,16 @@
     border: none;
     background-color: transparent; 
     cursor: pointer;
+    outline: none;
 }
 
 #button{
     display: flex;
     flex-direction: row;
-    position: relative; left: 18em; bottom: 0.5em;
+    position: relative; left: 17em; bottom: 3em;
     justify-content: flex-end;
-    width:40%
+    width:40%;
+    border: none;
 }
 
 #inputField{

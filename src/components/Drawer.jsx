@@ -78,7 +78,6 @@ class DrawerMenu extends Component {
             </ListItem>
           </List>
         </Drawer>
-
       </div>
     )
 
