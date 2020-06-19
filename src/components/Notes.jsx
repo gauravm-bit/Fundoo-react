@@ -21,10 +21,8 @@ class Notes extends Component {
     }
 
     getNotes = () => {
-
         service.getNotes()
             .then(data => {
-                // console.log(data)
                 this.setState({
                     notes: data.data.data.data
                 })
@@ -35,7 +33,7 @@ class Notes extends Component {
             })
     }
 
-    
+
 
 
     render() {
@@ -47,13 +45,13 @@ class Notes extends Component {
                     />
                 </div>
                 <div className='displayElements'>
-                    { this.state.notes.reverse().map((item, index) =>
+                    {this.state.notes.reverse().map((item, index) =>
                         <div key={index}>
                             <DisplayNote
                                 note={item} getNotes={this.getNotes} />
                         </div>
                     )}
-                 </div>
+                </div>
             </div>
 
         )

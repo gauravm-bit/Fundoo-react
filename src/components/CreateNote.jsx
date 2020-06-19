@@ -63,9 +63,7 @@ class CreateNote extends Component {
             title: '',
             description: ''
         }
-        // , () => {
-        //     console.log(this.state.toggleCards);
-        //}
+       
         )
     }
 
