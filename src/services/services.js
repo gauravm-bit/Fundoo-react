@@ -98,6 +98,18 @@ class Service {
                 })
         })
     }
+
+    getArchivedNotes() {
+        return new Promise((resolve, reject) => {
+            axios.get(baseUrl + `/notes/getArchiveNotesList?access_token=${sessionStorage.getItem('token')}`)
+                .then((response) => {
+                    resolve(response)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    }
 }
 
 

@@ -76,6 +76,18 @@ class Dashboard extends Component {
     }
   }
 
+  handleNotes = () =>{    
+    this.props.history.push('/dashboard/notes')
+  }
+ 
+  handleArchive = () =>{   
+    this.props.history.push('/dashboard/archived')
+  }
+
+  handleTrash = () =>{   
+    this.props.history.push('/dashboard/trash')
+  }
+
   handleDrawerOpen = () => {
     this.setState({
       openDrawer: !this.state.openDrawer,
@@ -94,8 +106,10 @@ class Dashboard extends Component {
           </div>
           <div >
             <Drawer
-
               getValue={this.state.openDrawer}
+              handleNotes={this.handleNotes}
+              handleArchive={this.handleArchive}
+              handleTrash={this.handleTrash}
             ></Drawer>
           </div>
           {/* <div>

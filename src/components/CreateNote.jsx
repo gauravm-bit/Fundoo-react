@@ -127,8 +127,6 @@ class CreateNote extends Component {
                                     <Button onClick={() => this.createNote()} className='button'>Close</Button>
                                 </div>
                             </div>
-
-
                         </Card>
                         :
                         <Card className="ClosedCard" variant="outlined" onClick={(event) => this.toggleView(event)} >

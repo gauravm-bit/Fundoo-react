@@ -24,7 +24,7 @@ class Notes extends Component {
 
         service.getNotes()
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 this.setState({
                     notes: data.data.data.data
                 })

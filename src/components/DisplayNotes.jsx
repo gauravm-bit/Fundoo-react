@@ -65,7 +65,13 @@ const theme = createMuiTheme({
         'root': {
           backgroundColor: 'transparent'
         }
-      }
+      },
+      MuiTooltip: {
+        tooltip: {
+            fontSize: "1em",
+
+        }
+    }
     }
   });
 
@@ -77,7 +83,7 @@ class DisplayNote extends Component {
             noteIdList: [this.props.note.id],
             isArchived: true
         }
-        console.log(data);
+        // console.log(data);
 
         service.archiveNotes(data)
             .then(res => {
@@ -100,7 +106,7 @@ class DisplayNote extends Component {
                             <div className='label1'>
                                 <TextField
                                     disabled
-                                    id='title'
+                                    id='titleDisplay'
                                     multiline={true}
                                     name='title'
                                     placeholder='Title'
@@ -129,7 +135,7 @@ class DisplayNote extends Component {
                                     </Tooltip>
                                 </div>}
                         </div>
-                        <div>
+                        <div className='label1'>
                             <TextField
                                 disabled
                                 id='descriptionDisplay'
@@ -149,7 +155,6 @@ class DisplayNote extends Component {
                     </Card>
                 </MuiThemeProvider>
             </div>
-
         )
     }
 }

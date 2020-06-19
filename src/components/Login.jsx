@@ -15,19 +15,7 @@ var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
 
 const theme = createMuiTheme({
   overrides: {
-    'MuiInputBase': {
-      'input': {
-        height: "1.5em",
-        width:"9em",
-        padding: "8px 12px 9px 12px",
-      },
-      'root': {
-        display: 'flex',
-        marginLeft: '8px',
-        marginRight:'8px',
-        cursor: 'text'
-      }
-    },
+  
     'MuiPaper': {
       'elevation4': {
         boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.1)'
@@ -37,18 +25,7 @@ const theme = createMuiTheme({
         border: '1px solid lightgrey'
       }
     },
-    'MuiButton': {
-      'root': {
-        backgroundColor: 'transparent'
-      }
-    },
-    'MuiOutlinedInput-input': {
-      'input': {
-      width: '24em',
-      padding: '18.5px 14px'
-      }
-  }
-
+  
   }
 });
 
@@ -96,14 +73,13 @@ class Login extends Component {
 
       service.login(call)
         .then(res => {
-          this.setState({ snackbaropen: true, snackbarmsg: 'logged in successfully' })
+          
           console.log(res)
 
           sessionStorage.setItem('token', res.data.id);
           this.props.history.push('/dashboard/notes')
           if (res.status === 200) {
-            // alert('Logged in successfully')
-            this.setState({ snackbaropen: true, snackbarmsg: 'logged in successfully' })
+            alert('Logged in successfully')            
           }
         })
         .catch(err => {
