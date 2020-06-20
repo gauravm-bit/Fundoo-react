@@ -3,115 +3,35 @@ const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api'
 
 class Service {
     
-    register(data) {
-        return new Promise((resolve, reject) => {
-            axios.post(baseUrl + '/user/userSignUp', data)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
-    }
-
-    login(data) {
-        return new Promise((resolve, reject) => {
-            axios.post(baseUrl + '/user/login', data)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
-    }
-
-    forgot(data) {
-        return new Promise((resolve, reject) => {
-            axios.post(baseUrl + '/user/reset', data)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
-    }
-
-    reset(data, token) {
-        return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/user/reset-password?access_token=${token}`, data)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
-    }
-
-    logout() {
-        return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/user/logout?access_token=${sessionStorage.getItem('token')}`)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
-    }
-
     addNote(note) {
-        return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/notes/addNotes?access_token=${sessionStorage.getItem('token')}`,note)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
+        return axios
+            .post(baseUrl + `/notes/addNotes?access_token=${localStorage.getItem('token')}`, note)
+            .then(response => { return response })
+            .catch(error => { return error })
     }
 
-    getNotes() {
-        return new Promise((resolve, reject) => {
-            axios.get(baseUrl + `/notes/getNotesList?access_token=${sessionStorage.getItem('token')}`)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
+    getNotes(){
+        return axios
+            .get(baseUrl + `/notes/getNotesList?access_token=${localStorage.getItem('token')}`)
+            .then(response => { return response })
+            .catch(error => { return error })
     }
+
+    
 
     archiveNotes(data) {
-        return new Promise((resolve, reject) => {
-            axios.post(baseUrl + `/notes/archiveNotes?access_token=${sessionStorage.getItem('token')}`,data)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
+        return axios
+            .post(baseUrl + `/notes/archiveNotes?access_token=${localStorage.getItem('token')}`,data)
+            .then(response => { return response })
+            .catch(error => { return error })
     }
 
     getArchivedNotes() {
-        return new Promise((resolve, reject) => {
-            axios.get(baseUrl + `/notes/getArchiveNotesList?access_token=${sessionStorage.getItem('token')}`)
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => {
-                    reject(error)
-                })
-        })
+        return axios
+            .get(baseUrl + `/notes/getArchiveNotesList?access_token=${localStorage.getItem('token')}`)
+            .then(response => { return response })
+            .catch(error => { return error })
     }
 }
-
-
 
 export default Service;

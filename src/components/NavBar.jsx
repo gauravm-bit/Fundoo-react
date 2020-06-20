@@ -18,8 +18,8 @@ import {
     Paper,
 } from '@material-ui/core';
 import logo from '../assets/keep.png'
-import Service from '../services/services';
-const Services = new Service();
+import userService from '../services/userService'
+const service = new userService()
 
 const useStyles = {
     grow: {
@@ -118,13 +118,10 @@ export default withStyles(useStyles)(
             })
         }
 
-
-
         logOut = () => {
-            Services.logout()
+            service.logout()
                 .then(res => {
-                    // console.log(this.props.props.history)
-                    sessionStorage.removeItem('token');
+                    localStorage.removeItem('token');
                     this.props.props.history.push('/')
                 })
                 .catch(err => {

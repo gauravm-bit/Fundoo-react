@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Service from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import { Button, IconButton } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
-
 import '../scss/Forgot.scss'
+import userService from '../services/userService';
+const service = new userService()
+
+
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm
 
@@ -43,19 +45,17 @@ class Forgot extends Component {
                 email: this.state.email
             }
 
-            let service = new Service()
-
             service.forgot(value)
                 .then(res => {
                     console.log(res)
-                    // alert('Link has been sent to your registered email address');
                     this.setState({snackbaropen:true,snackbarmsg:'Link has been sent to your registered email address'})
                     this.setState({
                         email: ''
                     })
                 })
                 .catch(err => {
-                    console.log(err)
+                    this.setState({snackbaropen:true,snackbarmsg:err})
+
                 })
         }
     }

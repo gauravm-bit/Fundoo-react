@@ -25,7 +25,9 @@ class Notes extends Component {
             .then(data => {
                 this.setState({
                     notes: data.data.data.data
+                    
                 })
+                
             }
             )
             .catch(err => {

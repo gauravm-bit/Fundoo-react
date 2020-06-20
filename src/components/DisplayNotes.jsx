@@ -77,6 +77,13 @@ const theme = createMuiTheme({
 
 class DisplayNote extends Component {
 
+  constructor(props) {
+    super(props)
+    console.log(this.props);
+    
+    
+  }
+  
 
   archiveNotes = () => {
     let data = {

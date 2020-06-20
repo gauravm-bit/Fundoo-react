@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Service from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import { Button, IconButton } from '@material-ui/core';
@@ -7,10 +6,12 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import Snackbar from '@material-ui/core/Snackbar';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import '../scss/Register.scss'
+import userService from '../services/userService';
+const service = new userService()
 
 var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
     passwordPattern = /^[a-zA-Z0-9]{6,20}$/,
-    namePattern = /[a-zA-Z]{1,10}/g
+    namePattern = /[a-zA-Z]{3,10}/
 
 class Register extends Component {
 
@@ -44,11 +45,10 @@ class Register extends Component {
     submit = () => {
 
         if (!namePattern.test(this.state.first_name) || !namePattern.test(this.state.last_name)) {
-            // alert('Firstname or lastname are invalid')
             this.setState({snackbaropen:true,snackbarmsg:'Firstname or lastname are invaild'})
         }
-        else if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
-            // alert('Email or password fields are invalid');
+        else
+         if (!emailPattern.test(this.state.email) || !passwordPattern.test(this.state.password)) {
             this.setState({snackbaropen:true,snackbarmsg:'Email or password fields are invalid'})
             return;
         }
@@ -57,7 +57,6 @@ class Register extends Component {
                 password: '',
                 confirm_password: ''
             })
-            // alert('Passwords do not match');
             this.setState({snackbaropen:true,snackbarmsg:'Passwords do not match'})
             return;
         }
@@ -71,9 +70,6 @@ class Register extends Component {
                 password: this.state.password,
                 service: this.state.service
             }
-
-            let service = new Service()
-
             service.register(value)
                 .then(res => {
                     console.log(res)
@@ -81,10 +77,10 @@ class Register extends Component {
                     this.props.history.push('/')
                 })
                 .catch(err => {
-                    console.log(err)
+                    this.setState({snackbaropen:true,snackbarmsg:err})
+
                 })
         }
-
     }
 
     showPassword(event) {

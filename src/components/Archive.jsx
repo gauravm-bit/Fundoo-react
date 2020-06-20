@@ -3,6 +3,7 @@ import DisplayNote from './DisplayNotes'
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 import Service from '../services/services';
+const service = new Service()
 
 const theme = createMuiTheme({
     overrides: {
@@ -70,18 +71,20 @@ const theme = createMuiTheme({
     }
 });
 
-const service = new Service()
+
 
 class Archive extends Component {
 
     constructor(props) {
         super(props)
 
-
+        
         this.state = {
             notes: []
         }
     }
+
+  
 
     componentDidMount() {
         this.getArchivedNotes()

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Service from '../services/services';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
 import { Button, IconButton } from '@material-ui/core';
@@ -7,6 +6,8 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import Snackbar from '@material-ui/core/Snackbar';
 import '../scss/Reset.scss'
+import userService from '../services/userService';
+const service = new userService()
 
 class Reset extends Component {
 
@@ -37,7 +38,6 @@ class Reset extends Component {
 
     submit = () => {
         if (this.state.password !== this.state.confirm_password) {
-            //  alert('Passwords dont match.Please enter again');
             this.setState({ snackbaropen: true, snackbarmsg: 'Passwords dont match.Please enter again' })
             this.setState({
                 password: '',
@@ -52,18 +52,15 @@ class Reset extends Component {
             newPassword: this.state.password
         }
 
-        let service = new Service()
-
         service.reset(value, token)
             .then(res => {
                 console.log(res)
-              //  alert('Password has been changed sucessfully');
                 this.setState({ snackbaropen: true, snackbarmsg: 'Password has been changed sucessfully' })
 
                 this.props.history.push('/')
             })
             .catch(err => {
-                console.log(err)
+                this.setState({snackbaropen:true,snackbarmsg:err})
             })
     }
 
